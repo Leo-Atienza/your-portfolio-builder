@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navItems = [
   { label: "Summary", href: "#about" },
@@ -85,9 +85,8 @@ const Navigation = () => {
                 href="/assets/Eric_Lee_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 rounded-full"
+                className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all duration-300 rounded-full"
               >
-                <FileText className="w-4 h-4" />
                 Resume
               </a>
             </div>
@@ -149,9 +148,8 @@ const Navigation = () => {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navItems.length * 0.05 }}
-                  className="flex items-center gap-2 px-4 py-3 rounded-xl text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-300"
+                  className="block px-4 py-3 rounded-xl text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary/50 transition-all duration-300"
                 >
-                  <FileText className="w-4 h-4" />
                   Resume
                 </motion.a>
               </div>
