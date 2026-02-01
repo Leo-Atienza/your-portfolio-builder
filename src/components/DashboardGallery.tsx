@@ -91,10 +91,10 @@ const DashboardGallery = ({
         </VisuallyHidden>
         
         {/* Header controls */}
-        <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between p-4 bg-gradient-to-b from-black/80 to-transparent">
-          <div className="text-white">
-            <h3 className="font-semibold text-lg">{projectTitle}</h3>
-            <p className="text-white/60 text-sm">
+        <div className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between p-3 sm:p-4 bg-gradient-to-b from-black/80 to-transparent">
+          <div className="text-white min-w-0 flex-1 mr-2">
+            <h3 className="font-semibold text-sm sm:text-lg truncate">{projectTitle}</h3>
+            <p className="text-white/60 text-xs sm:text-sm">
               {currentIndex + 1} of {images.length}
             </p>
           </div>
@@ -133,7 +133,7 @@ const DashboardGallery = ({
         </div>
 
         {/* Main image area */}
-        <div className="relative flex items-center justify-center w-full h-full pt-16 pb-20">
+        <div className="relative flex items-center justify-center w-full h-full pt-12 sm:pt-16 pb-16 sm:pb-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -169,10 +169,10 @@ const DashboardGallery = ({
                   e.stopPropagation();
                   handlePrevious();
                 }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors z-10"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors z-10"
                 aria-label="Previous image"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
               </motion.button>
 
               <motion.button
@@ -182,23 +182,23 @@ const DashboardGallery = ({
                   e.stopPropagation();
                   handleNext();
                 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors z-10"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors z-10"
                 aria-label="Next image"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </motion.button>
             </>
           )}
         </div>
 
         {/* Caption and thumbnail strip */}
-        <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black/80 to-transparent p-4">
-          <p className="text-white text-center mb-3 font-medium">
+        <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black/80 to-transparent p-3 sm:p-4">
+          <p className="text-white text-center mb-2 sm:mb-3 font-medium text-sm sm:text-base">
             {currentImage.caption}
           </p>
           
           {images.length > 1 && (
-            <div className="flex justify-center gap-2">
+            <div className="flex justify-center gap-1.5 sm:gap-2">
               {images.map((image, index) => (
                 <motion.button
                   key={index}
@@ -208,7 +208,7 @@ const DashboardGallery = ({
                     setCurrentIndex(index);
                     setIsZoomed(false);
                   }}
-                  className={`w-16 h-10 rounded-md overflow-hidden border-2 transition-all ${
+                  className={`w-12 h-8 sm:w-16 sm:h-10 rounded-md overflow-hidden border-2 transition-all ${
                     index === currentIndex
                       ? "border-white opacity-100"
                       : "border-transparent opacity-50 hover:opacity-80"

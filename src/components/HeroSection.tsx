@@ -61,9 +61,9 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(260_80%_60%/0.08),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(280_70%_60%/0.05),transparent_40%)]" />
 
-      {/* Floating Orbs - pure CSS for GPU compositing */}
+      {/* Floating Orbs - hidden on small screens for performance */}
       <div
-        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full animate-float opacity-30"
+        className="hidden sm:block absolute top-1/4 left-1/4 w-64 sm:w-96 h-64 sm:h-96 rounded-full animate-float opacity-30"
         style={{
           background: 'radial-gradient(circle, hsl(217 91% 60% / 0.15) 0%, transparent 70%)',
           filter: 'blur(40px)',
@@ -71,7 +71,7 @@ const HeroSection = () => {
         }}
       />
       <div
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full animate-float opacity-20"
+        className="hidden sm:block absolute bottom-1/4 right-1/4 w-56 sm:w-80 h-56 sm:h-80 rounded-full animate-float opacity-20"
         style={{
           background: 'radial-gradient(circle, hsl(260 80% 60% / 0.2) 0%, transparent 70%)',
           filter: 'blur(35px)',
@@ -99,7 +99,7 @@ const HeroSection = () => {
           {/* Location badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-muted-foreground mb-8"
+            className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-card text-muted-foreground mb-6 sm:mb-8"
           >
             <MapPin className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium">Markham, ON</span>
@@ -109,7 +109,7 @@ const HeroSection = () => {
           {/* Name */}
           <motion.h1
             variants={nameVariants}
-            className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-6 md:mb-8 tracking-tight"
+            className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-bold mb-4 sm:mb-6 md:mb-8 tracking-tight"
           >
             <motion.span
               className="block"
@@ -131,7 +131,7 @@ const HeroSection = () => {
 
           {/* Title and skills */}
           <motion.div variants={itemVariants}>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-2xl mx-auto mb-4 font-light tracking-tight">
+            <p className="text-base sm:text-xl md:text-2xl lg:text-3xl text-muted-foreground max-w-2xl mx-auto mb-4 font-light tracking-tight">
               Business Technology Management
             </p>
 
@@ -199,7 +199,7 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-16 sm:mb-20"
           initial="hidden"
           animate="visible"
           variants={{

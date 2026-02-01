@@ -78,7 +78,7 @@ const achievementVariants = {
 
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="relative py-32 overflow-hidden">
+    <section id="experience" className="relative py-20 sm:py-32 overflow-hidden">
       {/* Background effect */}
       <div
         className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-20"
@@ -150,7 +150,7 @@ const ExperienceSection = () => {
                         <h4 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight">{exp.title}</h4>
                         {exp.type && (
                           <motion.span
-                            className="text-[10px] sm:text-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary font-semibold"
+                            className="text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary font-semibold"
                             initial={{ opacity: 0, scale: 0.85 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}

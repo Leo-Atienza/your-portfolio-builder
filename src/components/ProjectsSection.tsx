@@ -147,7 +147,7 @@ const ProjectsSection = () => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <section id="projects" className="relative py-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
+      <section id="projects" className="relative py-20 sm:py-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
         {/* Background effect */}
         <div
           className="absolute inset-0"
@@ -169,7 +169,7 @@ const ProjectsSection = () => {
           </motion.div>
 
           <motion.div
-            className="grid md:grid-cols-2 gap-8"
+            className="grid md:grid-cols-2 gap-5 sm:gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -179,14 +179,14 @@ const ProjectsSection = () => {
               <motion.div
                 key={project.title}
                 variants={cardVariants}
-                className="glass-card rounded-3xl overflow-hidden group"
+                className="glass-card rounded-2xl sm:rounded-3xl overflow-hidden group"
                 whileHover={{
                   y: -6,
                   transition: { type: "spring", stiffness: 250, damping: 25 }
                 }}
               >
                 {/* Header with gradient */}
-                <div className={`p-6 sm:p-8 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+                <div className={`p-4 sm:p-6 md:p-8 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-black/30" />
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
@@ -197,7 +197,7 @@ const ProjectsSection = () => {
 
                   <div className="relative z-10 flex items-start justify-between">
                     <div className="flex-1 pr-4">
-                      <h4 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h4>
+                      <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-1">{project.title}</h4>
                       <p className="text-white/80 font-medium text-sm sm:text-base">{project.subtitle}</p>
                     </div>
                     <Tooltip>
@@ -221,7 +221,7 @@ const ProjectsSection = () => {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 sm:p-8">
+                <div className="p-4 sm:p-6 md:p-8">
                   {/* Metrics */}
                   <motion.div
                     className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8"
@@ -236,7 +236,7 @@ const ProjectsSection = () => {
                         custom={i}
                         variants={metricVariants}
                       >
-                        <p className="text-lg sm:text-2xl font-bold gradient-text">{highlight.metric}</p>
+                        <p className="text-base sm:text-lg md:text-2xl font-bold gradient-text">{highlight.metric}</p>
                         <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 leading-tight">{highlight.label}</p>
                       </motion.div>
                     ))}

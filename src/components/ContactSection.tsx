@@ -60,7 +60,7 @@ const ContactSection = () => {
   ];
 
   return (
-    <section id="contact" className="relative py-32 bg-gradient-to-b from-secondary/30 to-background">
+    <section id="contact" className="relative py-20 sm:py-32 bg-gradient-to-b from-secondary/30 to-background">
       {/* Background effects */}
       <div
         className="absolute inset-0"
@@ -87,7 +87,7 @@ const ContactSection = () => {
           <h2 className="section-label mb-4">Contact</h2>
           <h3 className="section-title mb-6">Let's Connect</h3>
           <motion.p
-            className="text-muted-foreground max-w-xl mx-auto text-lg"
+            className="text-muted-foreground max-w-xl mx-auto text-base sm:text-lg"
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -106,7 +106,7 @@ const ContactSection = () => {
           className="max-w-lg mx-auto"
         >
           <motion.div
-            className="glass-card rounded-3xl p-8 space-y-4"
+            className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 sm:space-y-4"
             whileHover={{ y: -3 }}
             transition={{ type: "spring", stiffness: 250, damping: 25 }}
           >
@@ -127,7 +127,7 @@ const ContactSection = () => {
                     }}
                   >
                     <motion.div
-                      className="p-4 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 text-primary group-hover:from-primary group-hover:to-primary group-hover:text-primary-foreground transition-all duration-500"
+                      className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 text-primary group-hover:from-primary group-hover:to-primary group-hover:text-primary-foreground transition-all duration-500"
                       whileHover={{ scale: 1.08, rotate: 3 }}
                       transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     >
@@ -135,7 +135,7 @@ const ContactSection = () => {
                     </motion.div>
                     <div className="flex-1">
                       <p className="text-sm text-muted-foreground font-medium">{item.label}</p>
-                      <p className="font-semibold">{item.value}</p>
+                      <p className="font-semibold text-sm sm:text-base break-all sm:break-normal">{item.value}</p>
                     </div>
                     {item.isLink && (
                       <motion.div

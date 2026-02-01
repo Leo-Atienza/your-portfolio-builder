@@ -75,7 +75,7 @@ const skillBadgeVariants = {
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="relative py-32 bg-gradient-to-b from-secondary/30 to-transparent">
+    <section id="skills" className="relative py-20 sm:py-32 bg-gradient-to-b from-secondary/30 to-transparent">
       {/* Background effect */}
       <div
         className="absolute inset-0"
@@ -97,7 +97,7 @@ const SkillsSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -107,21 +107,21 @@ const SkillsSection = () => {
             <motion.div
               key={category.title}
               variants={cardVariants}
-              className="glass-card rounded-3xl p-7 group"
+              className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 group"
               whileHover={{
                 y: -6,
                 transition: { type: "spring", stiffness: 250, damping: 25 }
               }}
             >
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <motion.div
-                  className={`p-3 rounded-2xl bg-gradient-to-br ${category.gradient} text-white shadow-lg`}
+                  className={`p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-gradient-to-br ${category.gradient} text-white shadow-lg`}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <category.icon className="w-6 h-6" />
+                  <category.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </motion.div>
-                <h4 className="text-xl font-bold">{category.title}</h4>
+                <h4 className="text-lg sm:text-xl font-bold">{category.title}</h4>
               </div>
 
               <motion.div

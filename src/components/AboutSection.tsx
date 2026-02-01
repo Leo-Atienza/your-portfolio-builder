@@ -54,7 +54,7 @@ const AboutSection = () => {
   ];
 
   return (
-    <section id="about" className="relative py-32 overflow-hidden">
+    <section id="about" className="relative py-20 sm:py-32 overflow-hidden">
       {/* Background accent */}
       <div
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30"
@@ -77,7 +77,7 @@ const AboutSection = () => {
         </motion.div>
 
         <motion.div
-          className="grid lg:grid-cols-2 gap-8"
+          className="grid lg:grid-cols-2 gap-5 sm:gap-8"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
@@ -85,24 +85,24 @@ const AboutSection = () => {
         >
           <motion.div
             variants={cardVariants}
-            className="glass-card rounded-3xl p-8 md:p-10 group"
+            className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 group"
             whileHover={{ y: -6, transition: { type: "spring", stiffness: 250, damping: 25 } }}
           >
-            <div className="flex items-start gap-5 mb-8">
+            <div className="flex items-start gap-3 sm:gap-5 mb-6 sm:mb-8">
               <motion.div
-                className="p-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 text-primary"
+                className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 text-primary"
                 whileHover={{ scale: 1.08, rotate: 3 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <GraduationCap className="w-7 h-7" />
+                <GraduationCap className="w-5 h-5 sm:w-7 sm:h-7" />
               </motion.div>
               <div>
-                <h4 className="text-2xl font-bold mb-2">Bachelor of Commerce</h4>
-                <p className="text-primary font-semibold text-lg">Business Technology Management (Honours)</p>
+                <h4 className="text-xl sm:text-2xl font-bold mb-1 sm:mb-2">Bachelor of Commerce</h4>
+                <p className="text-primary font-semibold text-sm sm:text-lg">Business Technology Management (Honours)</p>
               </div>
             </div>
 
-            <div className="flex items-center gap-6 text-muted-foreground mb-8">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
               <div className="flex items-center gap-2">
                 <BookOpen className="w-4 h-4 text-primary/60" />
                 <span className="font-medium">Seneca Polytechnic</span>
@@ -113,7 +113,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <p className="text-muted-foreground leading-relaxed text-lg">
+            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base md:text-lg">
               Graduating April 2026 with strengths in SQL, Python, Excel, Power BI, and Tableau.
               Experienced in analyzing trends and building dashboards to surface key insights that
               support business decisions. Seeking full-time roles in analytics or consulting focused
@@ -123,20 +123,20 @@ const AboutSection = () => {
 
           <motion.div
             variants={cardVariants}
-            className="glass-card rounded-3xl p-8 md:p-10 group"
+            className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 group"
             whileHover={{ y: -6, transition: { type: "spring", stiffness: 250, damping: 25 } }}
           >
-            <div className="flex items-center gap-3 mb-8">
+            <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <motion.div
                 whileHover={{ scale: 1.15, rotate: 90 }}
                 transition={{ type: "spring", stiffness: 250, damping: 20 }}
               >
                 <Sparkles className="w-5 h-5 text-primary" />
               </motion.div>
-              <h4 className="text-2xl font-bold">Relevant Coursework</h4>
+              <h4 className="text-xl sm:text-2xl font-bold">Relevant Coursework</h4>
             </div>
             <motion.div
-              className="flex flex-wrap gap-3"
+              className="flex flex-wrap gap-2 sm:gap-3"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -146,7 +146,7 @@ const AboutSection = () => {
                   key={course}
                   custom={index}
                   variants={badgeVariants}
-                  className="skill-badge text-base"
+                  className="skill-badge text-xs sm:text-sm md:text-base"
                   whileHover={{
                     scale: 1.06,
                     y: -3,
