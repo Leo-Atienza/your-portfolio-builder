@@ -1,41 +1,42 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, BookOpen, Sparkles } from "lucide-react";
 
-// Refined animation variants
+const smooth = [0.22, 1, 0.36, 1] as const;
+
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
+      staggerChildren: 0.15,
+      delayChildren: 0.08,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  hidden: { opacity: 0, y: 24, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.7,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      duration: 0.6,
+      ease: smooth,
     },
   },
 };
 
 const badgeVariants = {
-  hidden: { opacity: 0, scale: 0.8, y: 10 },
+  hidden: { opacity: 0, scale: 0.85, y: 8 },
   visible: (i: number) => ({
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      delay: i * 0.05,
-      duration: 0.4,
-      ease: [0.34, 1.56, 0.64, 1] as const,
+      delay: i * 0.04,
+      duration: 0.35,
+      ease: smooth,
     },
   }),
 };
@@ -55,31 +56,27 @@ const AboutSection = () => {
   return (
     <section id="about" className="relative py-32 overflow-hidden">
       {/* Background accent */}
-      <motion.div 
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px]"
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 0.3, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-30"
         style={{
           background: 'radial-gradient(ellipse, hsl(217 91% 60% / 0.1) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          filter: 'blur(60px)',
         }}
       />
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.5, ease: smooth }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Summary</h2>
           <h3 className="section-title">Education & Background</h3>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid lg:grid-cols-2 gap-8"
           variants={sectionVariants}
           initial="hidden"
@@ -89,13 +86,13 @@ const AboutSection = () => {
           <motion.div
             variants={cardVariants}
             className="glass-card rounded-3xl p-8 md:p-10 group"
-            whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+            whileHover={{ y: -6, transition: { type: "spring", stiffness: 250, damping: 25 } }}
           >
             <div className="flex items-start gap-5 mb-8">
-              <motion.div 
+              <motion.div
                 className="p-4 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 text-primary"
-                whileHover={{ scale: 1.1, rotate: 5 }}
-                transition={{ type: "spring", stiffness: 400 }}
+                whileHover={{ scale: 1.08, rotate: 3 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <GraduationCap className="w-7 h-7" />
               </motion.div>
@@ -117,9 +114,9 @@ const AboutSection = () => {
             </div>
 
             <p className="text-muted-foreground leading-relaxed text-lg">
-              Graduating April 2026 with strengths in SQL, Python, Excel, Power BI, and Tableau. 
-              Experienced in analyzing trends and building dashboards to surface key insights that 
-              support business decisions. Seeking full-time roles in analytics or consulting focused 
+              Graduating April 2026 with strengths in SQL, Python, Excel, Power BI, and Tableau.
+              Experienced in analyzing trends and building dashboards to surface key insights that
+              support business decisions. Seeking full-time roles in analytics or consulting focused
               on KPI reporting, data quality, and insight-driven recommendations.
             </p>
           </motion.div>
@@ -127,18 +124,18 @@ const AboutSection = () => {
           <motion.div
             variants={cardVariants}
             className="glass-card rounded-3xl p-8 md:p-10 group"
-            whileHover={{ y: -8, transition: { type: "spring", stiffness: 300, damping: 20 } }}
+            whileHover={{ y: -6, transition: { type: "spring", stiffness: 250, damping: 25 } }}
           >
             <div className="flex items-center gap-3 mb-8">
               <motion.div
-                whileHover={{ scale: 1.2, rotate: 180 }}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileHover={{ scale: 1.15, rotate: 90 }}
+                transition={{ type: "spring", stiffness: 250, damping: 20 }}
               >
                 <Sparkles className="w-5 h-5 text-primary" />
               </motion.div>
               <h4 className="text-2xl font-bold">Relevant Coursework</h4>
             </div>
-            <motion.div 
+            <motion.div
               className="flex flex-wrap gap-3"
               initial="hidden"
               whileInView="visible"
@@ -150,10 +147,10 @@ const AboutSection = () => {
                   custom={index}
                   variants={badgeVariants}
                   className="skill-badge text-base"
-                  whileHover={{ 
-                    scale: 1.08, 
-                    y: -4,
-                    transition: { type: "spring", stiffness: 400 }
+                  whileHover={{
+                    scale: 1.06,
+                    y: -3,
+                    transition: { type: "spring", stiffness: 300, damping: 22 }
                   }}
                 >
                   {course}

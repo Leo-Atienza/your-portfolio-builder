@@ -4,6 +4,8 @@ import { BarChart2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import DashboardGallery, { GalleryImage } from "./DashboardGallery";
 
+const smooth = [0.22, 1, 0.36, 1] as const;
+
 interface ProjectData {
   title: string;
   subtitle: string;
@@ -95,34 +97,34 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
+      staggerChildren: 0.1,
+      delayChildren: 0.08,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.7,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      duration: 0.6,
+      ease: smooth,
     },
   },
 };
 
 const metricVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, scale: 0.85 },
   visible: (i: number) => ({
     opacity: 1,
     scale: 1,
     transition: {
-      delay: i * 0.1,
-      duration: 0.5,
-      ease: [0.34, 1.56, 0.64, 1] as const,
+      delay: i * 0.08,
+      duration: 0.4,
+      ease: smooth,
     },
   }),
 };
@@ -147,12 +149,8 @@ const ProjectsSection = () => {
     <TooltipProvider delayDuration={200}>
       <section id="projects" className="relative py-32 bg-gradient-to-b from-transparent via-secondary/30 to-transparent">
         {/* Background effect */}
-        <motion.div 
+        <div
           className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
           style={{
             background: 'radial-gradient(ellipse at top, hsl(260 80% 60% / 0.05), transparent 60%)'
           }}
@@ -160,17 +158,17 @@ const ProjectsSection = () => {
 
         <div className="section-container relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.5, ease: smooth }}
             className="text-center mb-16"
           >
             <h2 className="section-label mb-4">Projects</h2>
             <h3 className="section-title">Featured Work</h3>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-2 gap-8"
             variants={containerVariants}
             initial="hidden"
@@ -182,21 +180,21 @@ const ProjectsSection = () => {
                 key={project.title}
                 variants={cardVariants}
                 className="glass-card rounded-3xl overflow-hidden group"
-                whileHover={{ 
-                  y: -8, 
-                  transition: { type: "spring", stiffness: 300, damping: 20 } 
+                whileHover={{
+                  y: -6,
+                  transition: { type: "spring", stiffness: 250, damping: 25 }
                 }}
               >
                 {/* Header with gradient */}
                 <div className={`p-6 sm:p-8 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-black/30" />
-                  <motion.div 
+                  <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.2, duration: 0.5 }}
+                    transition={{ delay: 0.15, duration: 0.4 }}
                   />
-                  
+
                   <div className="relative z-10 flex items-start justify-between">
                     <div className="flex-1 pr-4">
                       <h4 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h4>
@@ -207,9 +205,9 @@ const ProjectsSection = () => {
                         <motion.button
                           onClick={() => openGallery(project)}
                           className="p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors"
-                          whileHover={{ scale: 1.15, rotate: 8 }}
-                          whileTap={{ scale: 0.9 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          whileTap={{ scale: 0.93 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         >
                           <BarChart2 className="w-5 h-5 sm:w-7 sm:h-7" />
                         </motion.button>
@@ -225,15 +223,15 @@ const ProjectsSection = () => {
                 {/* Content */}
                 <div className="p-6 sm:p-8">
                   {/* Metrics */}
-                  <motion.div 
+                  <motion.div
                     className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8"
                     initial="hidden"
                     whileInView="visible"
                     viewport={{ once: true }}
                   >
                     {project.highlights.map((highlight, i) => (
-                      <motion.div 
-                        key={i} 
+                      <motion.div
+                        key={i}
                         className="text-center"
                         custom={i}
                         variants={metricVariants}
@@ -251,17 +249,17 @@ const ProjectsSection = () => {
                   {/* Tools */}
                   <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {project.tools.map((tool, index) => (
-                      <motion.span 
-                        key={tool} 
+                      <motion.span
+                        key={tool}
                         className="skill-badge text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2"
-                        initial={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.85 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ delay: index * 0.05, type: "spring", stiffness: 300 }}
-                        whileHover={{ 
-                          scale: 1.1, 
-                          y: -3,
-                          transition: { type: "spring", stiffness: 400 }
+                        transition={{ delay: index * 0.04, duration: 0.35, ease: smooth }}
+                        whileHover={{
+                          scale: 1.08,
+                          y: -2,
+                          transition: { type: "spring", stiffness: 300, damping: 22 }
                         }}
                       >
                         {tool}

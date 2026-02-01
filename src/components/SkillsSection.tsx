@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Database, BarChart3, Wrench, Users, FileText } from "lucide-react";
 
+const smooth = [0.22, 1, 0.36, 1] as const;
+
 const skillCategories = [
   {
     icon: Database,
@@ -39,34 +41,34 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  hidden: { opacity: 0, y: 24, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      duration: 0.5,
+      ease: smooth,
     },
   },
 };
 
 const skillBadgeVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
+  hidden: { opacity: 0, scale: 0.85 },
   visible: (i: number) => ({
     opacity: 1,
     scale: 1,
     transition: {
-      delay: i * 0.04,
+      delay: i * 0.03,
       duration: 0.3,
-      ease: [0.34, 1.56, 0.64, 1] as const,
+      ease: smooth,
     },
   }),
 };
@@ -75,30 +77,26 @@ const SkillsSection = () => {
   return (
     <section id="skills" className="relative py-32 bg-gradient-to-b from-secondary/30 to-transparent">
       {/* Background effect */}
-      <motion.div 
+      <div
         className="absolute inset-0"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
         style={{
           background: 'radial-gradient(ellipse at center, hsl(217 91% 60% / 0.05), transparent 70%)'
         }}
       />
-      
+
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.5, ease: smooth }}
           className="text-center mb-16"
         >
           <h2 className="section-label mb-4">Skills</h2>
           <h3 className="section-title">Technical & Professional Expertise</h3>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
           variants={containerVariants}
           initial="hidden"
@@ -110,23 +108,23 @@ const SkillsSection = () => {
               key={category.title}
               variants={cardVariants}
               className="glass-card rounded-3xl p-7 group"
-              whileHover={{ 
-                y: -8, 
-                transition: { type: "spring", stiffness: 300, damping: 20 } 
+              whileHover={{
+                y: -6,
+                transition: { type: "spring", stiffness: 250, damping: 25 }
               }}
             >
               <div className="flex items-center gap-4 mb-6">
-                <motion.div 
+                <motion.div
                   className={`p-3 rounded-2xl bg-gradient-to-br ${category.gradient} text-white shadow-lg`}
-                  whileHover={{ scale: 1.15, rotate: 8 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
                   <category.icon className="w-6 h-6" />
                 </motion.div>
                 <h4 className="text-xl font-bold">{category.title}</h4>
               </div>
 
-              <motion.div 
+              <motion.div
                 className="flex flex-wrap gap-2"
                 initial="hidden"
                 whileInView="visible"
@@ -138,10 +136,10 @@ const SkillsSection = () => {
                     custom={index}
                     variants={skillBadgeVariants}
                     className="skill-badge text-sm"
-                    whileHover={{ 
-                      scale: 1.1, 
-                      y: -3,
-                      transition: { type: "spring", stiffness: 400 }
+                    whileHover={{
+                      scale: 1.08,
+                      y: -2,
+                      transition: { type: "spring", stiffness: 300, damping: 22 }
                     }}
                   >
                     {skill}

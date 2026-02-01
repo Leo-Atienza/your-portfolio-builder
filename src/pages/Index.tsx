@@ -1,25 +1,29 @@
+import { lazy, Suspense } from "react";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import SkillsSection from "@/components/SkillsSection";
-import ExperienceSection from "@/components/ExperienceSection";
-import ProjectsSection from "@/components/ProjectsSection";
-import CertificationsSection from "@/components/CertificationsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
+
+const AboutSection = lazy(() => import("@/components/AboutSection"));
+const SkillsSection = lazy(() => import("@/components/SkillsSection"));
+const ExperienceSection = lazy(() => import("@/components/ExperienceSection"));
+const ProjectsSection = lazy(() => import("@/components/ProjectsSection"));
+const CertificationsSection = lazy(() => import("@/components/CertificationsSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ExperienceSection />
-      <ProjectsSection />
-      <CertificationsSection />
-      <ContactSection />
-      <Footer />
+      <Suspense fallback={null}>
+        <AboutSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <ProjectsSection />
+        <CertificationsSection />
+        <ContactSection />
+        <Footer />
+      </Suspense>
     </div>
   );
 };
