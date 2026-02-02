@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Award, Calendar, Sparkles } from "lucide-react";
 
-const smooth = [0.22, 1, 0.36, 1] as const;
+const silk = [0.16, 1, 0.3, 1] as const;
 
 const certifications = [
   {
@@ -30,20 +30,20 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.05,
+      staggerChildren: 0.12,
+      delayChildren: 0.06,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 14 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.45,
-      ease: smooth,
+      duration: 0.75,
+      ease: silk,
     },
   },
 };
@@ -61,10 +61,10 @@ const CertificationsSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: smooth }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: silk }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Certifications</h2>
@@ -76,7 +76,7 @@ const CertificationsSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           {certifications.map((cert) => (
             <motion.div
@@ -85,7 +85,7 @@ const CertificationsSection = () => {
               className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 hover:border-primary/30 transition-colors duration-500 group"
               whileHover={{
                 y: -3,
-                transition: { type: "spring", stiffness: 300, damping: 30 }
+                transition: { duration: 0.4, ease: silk }
               }}
             >
               <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">

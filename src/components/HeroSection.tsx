@@ -1,54 +1,54 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Mail, Linkedin, MapPin, Sparkles } from "lucide-react";
 
-// Smooth easing — no overshoot, buttery deceleration
-const smooth = [0.22, 1, 0.36, 1] as const;
+// Ultra-smooth expo easing — slow start, glacial deceleration
+const silk = [0.16, 1, 0.3, 1] as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
     },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: smooth,
+      duration: 0.75,
+      ease: silk,
     },
   },
 };
 
 const nameVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.8,
-      ease: smooth,
+      duration: 1.1,
+      ease: silk,
     },
   },
 };
 
 const buttonVariants = {
-  hidden: { opacity: 0, y: 16, scale: 0.95 },
+  hidden: { opacity: 0, y: 16, scale: 0.97 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.5,
-      ease: smooth,
+      duration: 0.7,
+      ease: silk,
     },
   },
 };
@@ -67,7 +67,6 @@ const HeroSection = () => {
         style={{
           background: 'radial-gradient(circle, hsl(217 91% 60% / 0.15) 0%, transparent 70%)',
           filter: 'blur(40px)',
-          willChange: 'transform',
         }}
       />
       <div
@@ -75,7 +74,6 @@ const HeroSection = () => {
         style={{
           background: 'radial-gradient(circle, hsl(260 80% 60% / 0.2) 0%, transparent 70%)',
           filter: 'blur(35px)',
-          willChange: 'transform',
           animationDelay: '-3s',
         }}
       />
@@ -115,7 +113,7 @@ const HeroSection = () => {
               className="block"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: smooth }}
+              transition={{ duration: 0.9, delay: 0.3, ease: silk }}
             >
               Eric
             </motion.span>
@@ -123,7 +121,7 @@ const HeroSection = () => {
               className="gradient-text"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.45, ease: smooth }}
+              transition={{ duration: 0.9, delay: 0.5, ease: silk }}
             >
               Lee
             </motion.span>
@@ -140,40 +138,40 @@ const HeroSection = () => {
               className="hidden sm:flex items-center justify-center gap-3 text-base md:text-lg text-muted-foreground/70 mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.5 }}
+              transition={{ delay: 0.7, duration: 0.7, ease: silk }}
             >
               <motion.span
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.45, ease: smooth }}
+                transition={{ delay: 0.8, duration: 0.6, ease: silk }}
               >
                 Data Analytics
               </motion.span>
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 0.9, type: "spring", stiffness: 200, damping: 20 }}
+                transition={{ delay: 0.9, duration: 0.6, ease: silk }}
               >
                 <Sparkles className="w-4 h-4 text-primary" />
               </motion.div>
               <motion.span
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1, duration: 0.45, ease: smooth }}
+                transition={{ delay: 1, duration: 0.6, ease: silk }}
               >
                 Business Intelligence
               </motion.span>
               <motion.div
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
-                transition={{ delay: 1.1, type: "spring", stiffness: 200, damping: 20 }}
+                transition={{ delay: 1.1, duration: 0.6, ease: silk }}
               >
                 <Sparkles className="w-4 h-4 text-primary" />
               </motion.div>
               <motion.span
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2, duration: 0.45, ease: smooth }}
+                transition={{ delay: 1.2, duration: 0.6, ease: silk }}
               >
                 Process Optimization
               </motion.span>
@@ -187,7 +185,7 @@ const HeroSection = () => {
                   className="flex items-center gap-2"
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.7 + i * 0.12, duration: 0.45, ease: smooth }}
+                  transition={{ delay: 0.7 + i * 0.15, duration: 0.6, ease: silk }}
                 >
                   <Sparkles className="w-3 h-3 text-primary" />
                   <span>{skill}</span>
@@ -205,7 +203,7 @@ const HeroSection = () => {
           variants={{
             hidden: {},
             visible: {
-              transition: { staggerChildren: 0.12, delayChildren: 1 }
+              transition: { staggerChildren: 0.15, delayChildren: 1 }
             }
           }}
         >
@@ -216,7 +214,7 @@ const HeroSection = () => {
             whileHover={{
               scale: 1.04,
               y: -2,
-              transition: { type: "spring", stiffness: 300, damping: 25 }
+              transition: { duration: 0.35, ease: silk }
             }}
             whileTap={{ scale: 0.98 }}
           >
@@ -232,7 +230,7 @@ const HeroSection = () => {
             whileHover={{
               scale: 1.04,
               y: -2,
-              transition: { type: "spring", stiffness: 300, damping: 25 }
+              transition: { duration: 0.35, ease: silk }
             }}
             whileTap={{ scale: 0.98 }}
           >
@@ -245,21 +243,21 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5, ease: smooth }}
+          transition={{ duration: 1, delay: 1.5, ease: silk }}
         >
-          <a href="#about" className="inline-flex flex-col items-center gap-3 text-muted-foreground/60 hover:text-primary transition-colors duration-500 group">
+          <a href="#about" className="inline-flex flex-col items-center gap-3 text-muted-foreground/60 hover:text-primary transition-colors duration-700 group">
             <span className="text-sm font-medium tracking-wide">Scroll to explore</span>
             <motion.div
               animate={{
                 y: [0, 8, 0],
               }}
               transition={{
-                duration: 2.2,
+                duration: 2.8,
                 repeat: Infinity,
                 ease: [0.45, 0.05, 0.55, 0.95]
               }}
             >
-              <ArrowDown className="w-5 h-5 group-hover:text-primary transition-colors" />
+              <ArrowDown className="w-5 h-5 group-hover:text-primary transition-colors duration-500" />
             </motion.div>
           </a>
         </motion.div>

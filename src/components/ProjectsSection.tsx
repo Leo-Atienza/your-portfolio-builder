@@ -4,7 +4,7 @@ import { BarChart2 } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import DashboardGallery, { GalleryImage } from "./DashboardGallery";
 
-const smooth = [0.22, 1, 0.36, 1] as const;
+const silk = [0.16, 1, 0.3, 1] as const;
 
 interface ProjectData {
   title: string;
@@ -98,32 +98,32 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.05,
+      staggerChildren: 0.18,
+      delayChildren: 0.08,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 16 },
+  hidden: { opacity: 0, y: 28 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: smooth,
-      staggerChildren: 0.04,
-      delayChildren: 0.1,
+      duration: 0.85,
+      ease: silk,
+      staggerChildren: 0.05,
+      delayChildren: 0.12,
     },
   },
 };
 
 const childFade = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: smooth },
+    transition: { duration: 0.55, ease: silk },
   },
 };
 
@@ -156,10 +156,10 @@ const ProjectsSection = () => {
 
         <div className="section-container relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.45, ease: smooth }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: silk }}
             className="text-center mb-16"
           >
             <h2 className="section-label mb-4">Projects</h2>
@@ -172,7 +172,7 @@ const ProjectsSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             {projects.map((project) => (
               <motion.div
@@ -181,7 +181,7 @@ const ProjectsSection = () => {
                 className="glass-card rounded-2xl sm:rounded-3xl overflow-hidden group"
                 whileHover={{
                   y: -4,
-                  transition: { type: "spring", stiffness: 300, damping: 30 }
+                  transition: { duration: 0.4, ease: silk }
                 }}
               >
                 {/* Header with gradient */}

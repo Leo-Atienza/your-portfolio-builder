@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, MapPin, ArrowRight, Phone } from "lucide-react";
 
-const smooth = [0.22, 1, 0.36, 1] as const;
+const silk = [0.16, 1, 0.3, 1] as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.08,
+      staggerChildren: 0.1,
+      delayChildren: 0.1,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.4,
-      ease: smooth,
+      duration: 0.6,
+      ease: silk,
     },
   },
 };
@@ -77,10 +77,10 @@ const ContactSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: smooth }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: silk }}
           className="text-center mb-16"
         >
           <h2 className="section-label mb-4">Contact</h2>
@@ -92,10 +92,10 @@ const ContactSection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: smooth }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.75, ease: silk }}
           className="max-w-lg mx-auto"
         >
           <motion.div
@@ -116,7 +116,7 @@ const ContactSection = () => {
                     className="contact-card group"
                     whileHover={{
                       x: 4,
-                      transition: { type: "spring", stiffness: 400, damping: 28 }
+                      transition: { duration: 0.35, ease: silk }
                     }}
                   >
                     <motion.div

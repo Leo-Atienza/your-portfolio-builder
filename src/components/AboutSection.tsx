@@ -1,39 +1,40 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Calendar, BookOpen, Sparkles } from "lucide-react";
 
-const smooth = [0.22, 1, 0.36, 1] as const;
+// Ultra-smooth expo easing — slow start, glacial deceleration
+const silk = [0.16, 1, 0.3, 1] as const;
 
 const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: smooth,
-      staggerChildren: 0.03,
+      staggerChildren: 0.15,
       delayChildren: 0.08,
     },
   },
 };
 
-const childFade = {
-  hidden: { opacity: 0, y: 6 },
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: smooth },
+    transition: {
+      duration: 0.8,
+      ease: silk,
+      staggerChildren: 0.04,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const childFade = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: silk },
   },
 };
 
@@ -62,10 +63,10 @@ const AboutSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: smooth }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: silk }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Summary</h2>
@@ -77,12 +78,12 @@ const AboutSection = () => {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div
             variants={cardVariants}
             className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 group"
-            whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 30 } }}
+            whileHover={{ y: -4, transition: { duration: 0.4, ease: silk } }}
           >
             <div className="flex items-start gap-3 sm:gap-5 mb-6 sm:mb-8">
               <motion.div
@@ -120,7 +121,7 @@ const AboutSection = () => {
           <motion.div
             variants={cardVariants}
             className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 group"
-            whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 30 } }}
+            whileHover={{ y: -4, transition: { duration: 0.4, ease: silk } }}
           >
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <motion.div

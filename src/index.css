@@ -75,20 +75,23 @@
   }
 
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    html {
-      scroll-behavior: smooth;
-    }
+  /* Lenis smooth scroll integration */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
     * {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
@@ -144,8 +147,8 @@
 @layer components {
   .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(8px) saturate(130%);
-    -webkit-backdrop-filter: blur(8px) saturate(130%);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     border: 1px solid var(--glass-border);
     box-shadow: var(--shadow-card);
     position: relative;
@@ -153,8 +156,9 @@
     transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    contain: layout style paint;
+    transition: box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card:hover {
@@ -168,7 +172,7 @@
     background: var(--glass-shine);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-card:hover::before {
@@ -181,7 +185,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     background-size: 200% 200%;
-    animation: shimmer 8s ease-in-out infinite;
+    animation: shimmer 12s ease-in-out infinite;
   }
 
   .glow-primary {
@@ -194,15 +198,16 @@
 
   .section-container {
     @apply max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24;
+    contain: layout style;
   }
 
   .skill-badge {
     @apply px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium;
     background: hsl(var(--secondary));
     border: 1px solid var(--glass-border);
-    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
     overflow: hidden;
   }
@@ -213,7 +218,9 @@
     inset: 0;
     background: linear-gradient(135deg, hsl(var(--primary) / 0) 0%, hsl(var(--primary) / 0.15) 100%);
     opacity: 0;
-    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    contain: strict;
   }
 
   .skill-badge:hover {
@@ -232,8 +239,8 @@
     background: var(--gradient-primary);
     background-size: 200% 200%;
     color: hsl(var(--primary-foreground));
-    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                background-position 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                background-position 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: var(--glow-soft), 0 4px 20px -4px hsl(var(--primary) / 0.5);
   }
 
@@ -245,11 +252,12 @@
   .btn-glass {
     @apply relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 rounded-full font-semibold text-sm sm:text-base;
     background: var(--glass-bg);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
     border: 1px solid var(--glass-border);
     color: hsl(var(--foreground));
-    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    contain: layout style paint;
+    transition: box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .btn-glass:hover {
@@ -287,8 +295,8 @@
     @apply flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl;
     background: hsl(var(--secondary) / 0.5);
     border: 1px solid transparent;
-    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .contact-card:hover {
@@ -324,7 +332,7 @@
   }
 
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
 
   .animate-pulse-slow {
@@ -338,19 +346,18 @@
   /* GPU acceleration helpers */
   .transform-gpu {
     transform: translateZ(0);
-    will-change: transform;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
 
   /* Smooth transition presets */
   .transition-smooth {
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    transition-duration: 0.5s;
   }
 
   .transition-premium {
-    transition: all 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 

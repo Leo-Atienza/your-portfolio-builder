@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 
-const smooth = [0.22, 1, 0.36, 1] as const;
+const silk = [0.16, 1, 0.3, 1] as const;
 
 const experiences = [
   {
@@ -45,31 +45,31 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
+      staggerChildren: 0.18,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 14 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5,
-      ease: smooth,
-      staggerChildren: 0.05,
-      delayChildren: 0.08,
+      duration: 0.8,
+      ease: silk,
+      staggerChildren: 0.06,
+      delayChildren: 0.1,
     },
   },
 };
 
 const childFade = {
-  hidden: { opacity: 0, x: -8 },
+  hidden: { opacity: 0, x: -6 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.35, ease: smooth },
+    transition: { duration: 0.55, ease: silk },
   },
 };
 
@@ -87,10 +87,10 @@ const ExperienceSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: smooth }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: silk }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Experience</h2>
@@ -104,7 +104,7 @@ const ExperienceSection = () => {
             initial={{ scaleY: 0, originY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: smooth }}
+            transition={{ duration: 1.2, ease: silk }}
           />
 
           <motion.div
@@ -112,7 +112,7 @@ const ExperienceSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
+            viewport={{ once: true, margin: "-100px" }}
           >
             {experiences.map((exp, index) => (
               <motion.div
@@ -138,7 +138,7 @@ const ExperienceSection = () => {
                   className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 group"
                   whileHover={{
                     y: -3,
-                    transition: { type: "spring", stiffness: 300, damping: 30 }
+                    transition: { duration: 0.4, ease: silk }
                   }}
                 >
                   <div className="flex flex-col gap-3 mb-5 sm:mb-6">

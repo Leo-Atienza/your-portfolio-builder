@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Database, BarChart3, Wrench, Users, FileText } from "lucide-react";
 
-const smooth = [0.22, 1, 0.36, 1] as const;
+const silk = [0.16, 1, 0.3, 1] as const;
 
 const skillCategories = [
   {
@@ -41,32 +41,32 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.07,
-      delayChildren: 0.05,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.45,
-      ease: smooth,
-      staggerChildren: 0.025,
+      staggerChildren: 0.1,
       delayChildren: 0.06,
     },
   },
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.75,
+      ease: silk,
+      staggerChildren: 0.035,
+      delayChildren: 0.08,
+    },
+  },
+};
+
 const childFade = {
-  hidden: { opacity: 0, scale: 0.92 },
+  hidden: { opacity: 0, scale: 0.94 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.3, ease: smooth },
+    transition: { duration: 0.45, ease: silk },
   },
 };
 
@@ -83,10 +83,10 @@ const SkillsSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.45, ease: smooth }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.7, ease: silk }}
           className="text-center mb-16"
         >
           <h2 className="section-label mb-4">Skills</h2>
@@ -98,7 +98,7 @@ const SkillsSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
+          viewport={{ once: true, margin: "-100px" }}
         >
           {skillCategories.map((category) => (
             <motion.div
@@ -107,7 +107,7 @@ const SkillsSection = () => {
               className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 group"
               whileHover={{
                 y: -4,
-                transition: { type: "spring", stiffness: 300, damping: 30 }
+                transition: { duration: 0.4, ease: silk }
               }}
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">

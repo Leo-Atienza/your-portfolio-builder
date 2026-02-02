@@ -46,8 +46,8 @@ const Navigation = () => {
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
           isScrolled
             ? "bg-background/80 backdrop-blur-md border-b border-border/30 shadow-lg"
             : "bg-transparent"
@@ -76,7 +76,7 @@ const Navigation = () => {
                     <motion.span
                       layoutId="activeNav"
                       className="absolute inset-0 bg-primary/10 rounded-full -z-10"
-                      transition={{ type: "spring", stiffness: 350, damping: 35 }}
+                      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     />
                   )}
                 </a>
