@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Award, Calendar, Sparkles } from "lucide-react";
 
+const smooth = [0.22, 1, 0.36, 1] as const;
+
 const certifications = [
   {
     title: "Data Analytics",
@@ -23,6 +25,29 @@ const certifications = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: smooth,
+    },
+  },
+};
+
 const CertificationsSection = () => {
   return (
     <section id="certifications" className="relative py-20 sm:py-32 overflow-hidden">
@@ -36,30 +61,37 @@ const CertificationsSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: smooth }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Certifications</h2>
           <h3 className="section-title">Professional Development</h3>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-          {certifications.map((cert, index) => (
+        <motion.div
+          className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
+          {certifications.map((cert) => (
             <motion.div
               key={cert.title}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: index * 0.15, ease: [0.4, 0, 0.2, 1] }}
-              className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 hover:border-primary/30 transition-all duration-500 group"
+              variants={cardVariants}
+              className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 hover:border-primary/30 transition-colors duration-500 group"
+              whileHover={{
+                y: -3,
+                transition: { type: "spring", stiffness: 300, damping: 30 }
+              }}
             >
               <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <motion.div
-                  className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 text-primary group-hover:scale-110 transition-transform duration-500"
-                  whileHover={{ rotate: 5 }}
+                  className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 text-primary group-hover:scale-105 transition-transform duration-500"
+                  whileHover={{ rotate: 3 }}
                 >
                   <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                 </motion.div>
@@ -78,8 +110,8 @@ const CertificationsSection = () => {
                   <span>{cert.period}</span>
                 </div>
                 <span className={`inline-flex items-center gap-1.5 text-xs sm:text-sm px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full font-medium ${
-                  cert.status === "Completed" 
-                    ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30" 
+                  cert.status === "Completed"
+                    ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
                     : "bg-amber-500/15 text-amber-400 border border-amber-500/30"
                 }`}>
                   {cert.status === "In Progress" && <Sparkles className="w-3 h-3" />}
@@ -88,7 +120,7 @@ const CertificationsSection = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

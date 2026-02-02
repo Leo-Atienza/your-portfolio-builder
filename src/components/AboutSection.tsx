@@ -8,37 +8,33 @@ const sectionVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.08,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24, scale: 0.97 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: smooth,
+      staggerChildren: 0.03,
+      delayChildren: 0.08,
     },
   },
 };
 
-const badgeVariants = {
-  hidden: { opacity: 0, scale: 0.85, y: 8 },
-  visible: (i: number) => ({
+const childFade = {
+  hidden: { opacity: 0, y: 6 },
+  visible: {
     opacity: 1,
-    scale: 1,
     y: 0,
-    transition: {
-      delay: i * 0.04,
-      duration: 0.35,
-      ease: smooth,
-    },
-  }),
+    transition: { duration: 0.35, ease: smooth },
+  },
 };
 
 const AboutSection = () => {
@@ -66,10 +62,10 @@ const AboutSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, ease: smooth }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: smooth }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Summary</h2>
@@ -81,18 +77,18 @@ const AboutSection = () => {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-60px" }}
         >
           <motion.div
             variants={cardVariants}
             className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 group"
-            whileHover={{ y: -6, transition: { type: "spring", stiffness: 250, damping: 25 } }}
+            whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 30 } }}
           >
             <div className="flex items-start gap-3 sm:gap-5 mb-6 sm:mb-8">
               <motion.div
                 className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 text-primary"
-                whileHover={{ scale: 1.08, rotate: 3 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                whileHover={{ scale: 1.06 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
                 <GraduationCap className="w-5 h-5 sm:w-7 sm:h-7" />
               </motion.div>
@@ -124,33 +120,28 @@ const AboutSection = () => {
           <motion.div
             variants={cardVariants}
             className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 group"
-            whileHover={{ y: -6, transition: { type: "spring", stiffness: 250, damping: 25 } }}
+            whileHover={{ y: -4, transition: { type: "spring", stiffness: 300, damping: 30 } }}
           >
             <div className="flex items-center gap-3 mb-6 sm:mb-8">
               <motion.div
-                whileHover={{ scale: 1.15, rotate: 90 }}
-                transition={{ type: "spring", stiffness: 250, damping: 20 }}
+                whileHover={{ scale: 1.1, rotate: 45 }}
+                transition={{ type: "spring", stiffness: 300, damping: 22 }}
               >
                 <Sparkles className="w-5 h-5 text-primary" />
               </motion.div>
               <h4 className="text-xl sm:text-2xl font-bold">Relevant Coursework</h4>
             </div>
-            <motion.div
-              className="flex flex-wrap gap-2 sm:gap-3"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {coursework.map((course, index) => (
+            {/* Badges inherit animation from parent cardVariants */}
+            <motion.div className="flex flex-wrap gap-2 sm:gap-3">
+              {coursework.map((course) => (
                 <motion.span
                   key={course}
-                  custom={index}
-                  variants={badgeVariants}
+                  variants={childFade}
                   className="skill-badge text-xs sm:text-sm md:text-base"
                   whileHover={{
-                    scale: 1.06,
-                    y: -3,
-                    transition: { type: "spring", stiffness: 300, damping: 22 }
+                    scale: 1.05,
+                    y: -1,
+                    transition: { type: "spring", stiffness: 400, damping: 25 }
                   }}
                 >
                   {course}

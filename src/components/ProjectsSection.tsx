@@ -92,41 +92,39 @@ const projects: ProjectData[] = [
   },
 ];
 
+// Single parent controls everything — no nested whileInView
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.08,
+      staggerChildren: 0.12,
+      delayChildren: 0.05,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: smooth,
+      staggerChildren: 0.04,
+      delayChildren: 0.1,
     },
   },
 };
 
-const metricVariants = {
-  hidden: { opacity: 0, scale: 0.85 },
-  visible: (i: number) => ({
+const childFade = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
     opacity: 1,
-    scale: 1,
-    transition: {
-      delay: i * 0.08,
-      duration: 0.4,
-      ease: smooth,
-    },
-  }),
+    y: 0,
+    transition: { duration: 0.35, ease: smooth },
+  },
 };
 
 const ProjectsSection = () => {
@@ -158,22 +156,23 @@ const ProjectsSection = () => {
 
         <div className="section-container relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, ease: smooth }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.45, ease: smooth }}
             className="text-center mb-16"
           >
             <h2 className="section-label mb-4">Projects</h2>
             <h3 className="section-title">Featured Work</h3>
           </motion.div>
 
+          {/* Single whileInView controls all cards via variant propagation */}
           <motion.div
             className="grid md:grid-cols-2 gap-5 sm:gap-8"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-60px" }}
           >
             {projects.map((project) => (
               <motion.div
@@ -181,19 +180,14 @@ const ProjectsSection = () => {
                 variants={cardVariants}
                 className="glass-card rounded-2xl sm:rounded-3xl overflow-hidden group"
                 whileHover={{
-                  y: -6,
-                  transition: { type: "spring", stiffness: 250, damping: 25 }
+                  y: -4,
+                  transition: { type: "spring", stiffness: 300, damping: 30 }
                 }}
               >
                 {/* Header with gradient */}
                 <div className={`p-4 sm:p-6 md:p-8 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                   <div className="absolute inset-0 bg-black/30" />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ delay: 0.15, duration: 0.4 }}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
                   <div className="relative z-10 flex items-start justify-between">
                     <div className="flex-1 pr-4">
@@ -205,9 +199,9 @@ const ProjectsSection = () => {
                         <motion.button
                           onClick={() => openGallery(project)}
                           className="p-2 sm:p-3 rounded-xl sm:rounded-2xl bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 transition-colors"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          whileTap={{ scale: 0.93 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                          whileHover={{ scale: 1.08 }}
+                          whileTap={{ scale: 0.95 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 25 }}
                         >
                           <BarChart2 className="w-5 h-5 sm:w-7 sm:h-7" />
                         </motion.button>
@@ -220,21 +214,15 @@ const ProjectsSection = () => {
                   <p className="relative z-10 text-white/70 text-xs sm:text-sm mt-3 sm:mt-4 font-medium">{project.period}</p>
                 </div>
 
-                {/* Content */}
+                {/* Content — all children inherit variants from cardVariants */}
                 <div className="p-4 sm:p-6 md:p-8">
-                  {/* Metrics */}
-                  <motion.div
-                    className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                  >
+                  {/* Metrics — use variant propagation, no separate whileInView */}
+                  <motion.div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 sm:mb-8">
                     {project.highlights.map((highlight, i) => (
                       <motion.div
                         key={i}
                         className="text-center"
-                        custom={i}
-                        variants={metricVariants}
+                        variants={childFade}
                       >
                         <p className="text-base sm:text-lg md:text-2xl font-bold gradient-text">{highlight.metric}</p>
                         <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 leading-tight">{highlight.label}</p>
@@ -242,30 +230,29 @@ const ProjectsSection = () => {
                     ))}
                   </motion.div>
 
-                  <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base">
+                  <motion.p
+                    variants={childFade}
+                    className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-sm sm:text-base"
+                  >
                     {project.description}
-                  </p>
+                  </motion.p>
 
-                  {/* Tools */}
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                    {project.tools.map((tool, index) => (
+                  {/* Tools — variant propagation, no individual whileInView */}
+                  <motion.div className="flex flex-wrap gap-1.5 sm:gap-2" variants={childFade}>
+                    {project.tools.map((tool) => (
                       <motion.span
                         key={tool}
                         className="skill-badge text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.04, duration: 0.35, ease: smooth }}
                         whileHover={{
-                          scale: 1.08,
-                          y: -2,
-                          transition: { type: "spring", stiffness: 300, damping: 22 }
+                          scale: 1.06,
+                          y: -1,
+                          transition: { type: "spring", stiffness: 400, damping: 25 }
                         }}
                       >
                         {tool}
                       </motion.span>
                     ))}
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             ))}

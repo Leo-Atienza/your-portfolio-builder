@@ -105,17 +105,10 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Offscreen sections skip rendering until near viewport */
-  section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 800px;
-  }
-
-  /* GPU acceleration only for elements that animate on hover */
+  /* GPU compositing for interactive elements */
   .btn-premium,
   .btn-glass,
   .contact-card {
-    will-change: transform;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
   }
@@ -125,24 +118,22 @@
     color: hsl(var(--foreground));
   }
 
-  /* Custom scrollbar */
+  /* Custom scrollbar — thin and smooth */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    background: hsl(var(--background));
+    background: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted));
-    border-radius: 5px;
-    border: 2px solid hsl(var(--background));
-    transition: background 0.2s ease;
+    background: hsl(var(--muted) / 0.5);
+    border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--primary) / 0.6);
+    background: hsl(var(--primary) / 0.5);
   }
 }
 
@@ -156,14 +147,13 @@
     position: relative;
     overflow: hidden;
     transform: translate3d(0, 0, 0);
-    contain: layout style paint;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.3s ease;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transition: box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .glass-card:hover {
-    transform: translateY(-4px) translate3d(0, 0, 0);
     box-shadow: var(--shadow-elevated), var(--glow-soft);
   }
 
@@ -174,7 +164,7 @@
     background: var(--glass-shine);
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .glass-card:hover::before {
@@ -206,7 +196,9 @@
     @apply px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium;
     background: hsl(var(--secondary));
     border: 1px solid var(--glass-border);
-    transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     position: relative;
     overflow: hidden;
   }
@@ -217,13 +209,12 @@
     inset: 0;
     background: linear-gradient(135deg, hsl(var(--primary) / 0) 0%, hsl(var(--primary) / 0.15) 100%);
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .skill-badge:hover {
     background: hsl(var(--primary) / 0.15);
     border-color: hsl(var(--primary) / 0.5);
-    transform: translateY(-2px);
     box-shadow: 0 8px 24px -8px hsl(var(--primary) / 0.25);
   }
 
@@ -237,18 +228,14 @@
     background: var(--gradient-primary);
     background-size: 200% 200%;
     color: hsl(var(--primary-foreground));
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                background-position 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     box-shadow: var(--glow-soft), 0 4px 20px -4px hsl(var(--primary) / 0.5);
   }
 
   .btn-premium:hover {
-    transform: translateY(-2px);
     box-shadow: var(--glow-primary), 0 8px 30px -4px hsl(var(--primary) / 0.6);
     background-position: 100% 100%;
-  }
-
-  .btn-premium:active {
-    transform: translateY(0);
   }
 
   .btn-glass {
@@ -257,11 +244,11 @@
     backdrop-filter: blur(8px);
     border: 1px solid var(--glass-border);
     color: hsl(var(--foreground));
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .btn-glass:hover {
-    transform: translateY(-2px);
     border-color: hsl(var(--primary) / 0.5);
     box-shadow: var(--glow-soft);
   }
@@ -296,13 +283,13 @@
     @apply flex items-center gap-3 sm:gap-4 p-4 sm:p-5 rounded-2xl;
     background: hsl(var(--secondary) / 0.5);
     border: 1px solid transparent;
-    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: background 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .contact-card:hover {
     background: hsl(var(--primary) / 0.1);
     border-color: hsl(var(--primary) / 0.3);
-    transform: translateX(8px);
   }
 
   /* Project card gradient overlay */

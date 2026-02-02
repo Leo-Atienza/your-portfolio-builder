@@ -45,35 +45,32 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15,
+      staggerChildren: 0.12,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, x: -30, scale: 0.97 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
-    x: 0,
-    scale: 1,
+    y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.5,
       ease: smooth,
+      staggerChildren: 0.05,
+      delayChildren: 0.08,
     },
   },
 };
 
-const achievementVariants = {
-  hidden: { opacity: 0, x: -12 },
-  visible: (i: number) => ({
+const childFade = {
+  hidden: { opacity: 0, x: -8 },
+  visible: {
     opacity: 1,
     x: 0,
-    transition: {
-      delay: i * 0.08,
-      duration: 0.4,
-      ease: smooth,
-    },
-  }),
+    transition: { duration: 0.35, ease: smooth },
+  },
 };
 
 const ExperienceSection = () => {
@@ -90,10 +87,10 @@ const ExperienceSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, ease: smooth }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: smooth }}
           className="mb-16"
         >
           <h2 className="section-label mb-4">Experience</h2>
@@ -107,7 +104,7 @@ const ExperienceSection = () => {
             initial={{ scaleY: 0, originY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: smooth }}
+            transition={{ duration: 0.8, ease: smooth }}
           />
 
           <motion.div
@@ -115,7 +112,7 @@ const ExperienceSection = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-60px" }}
           >
             {experiences.map((exp, index) => (
               <motion.div
@@ -126,22 +123,22 @@ const ExperienceSection = () => {
                 {/* Timeline dot */}
                 <motion.div
                   className="absolute left-0 md:left-6 top-10 timeline-dot hidden md:block"
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{
-                    delay: index * 0.15 + 0.2,
+                    delay: index * 0.1 + 0.15,
                     type: "spring",
-                    stiffness: 300,
-                    damping: 22
+                    stiffness: 350,
+                    damping: 25
                   }}
                 />
 
                 <motion.div
                   className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 group"
                   whileHover={{
-                    y: -5,
-                    transition: { type: "spring", stiffness: 250, damping: 25 }
+                    y: -3,
+                    transition: { type: "spring", stiffness: 300, damping: 30 }
                   }}
                 >
                   <div className="flex flex-col gap-3 mb-5 sm:mb-6">
@@ -149,15 +146,9 @@ const ExperienceSection = () => {
                       <div className="flex items-start sm:items-center gap-2 sm:gap-3 flex-wrap mb-2">
                         <h4 className="text-lg sm:text-xl md:text-2xl font-bold leading-tight">{exp.title}</h4>
                         {exp.type && (
-                          <motion.span
-                            className="text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary font-semibold"
-                            initial={{ opacity: 0, scale: 0.85 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.4, type: "spring", stiffness: 250, damping: 22 }}
-                          >
+                          <span className="text-xs px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-gradient-to-r from-primary/20 to-accent/20 text-primary font-semibold">
                             {exp.type}
-                          </motion.span>
+                          </span>
                         )}
                       </div>
                       <p className="text-primary font-semibold text-base sm:text-lg">{exp.company}</p>
@@ -167,23 +158,15 @@ const ExperienceSection = () => {
                     </div>
                   </div>
 
+                  {/* Achievements inherit from parent cardVariants */}
                   <ul className="space-y-3 sm:space-y-4">
                     {exp.achievements.map((achievement, i) => (
                       <motion.li
                         key={i}
-                        className="flex items-start gap-3 sm:gap-4 text-muted-foreground group/item"
-                        custom={i}
-                        variants={achievementVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
+                        className="flex items-start gap-3 sm:gap-4 text-muted-foreground"
+                        variants={childFade}
                       >
-                        <motion.div
-                          whileHover={{ scale: 1.15, rotate: 8 }}
-                          transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        >
-                          <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary mt-0.5 flex-shrink-0" />
-                        </motion.div>
+                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-primary mt-0.5 flex-shrink-0" />
                         <span className="leading-relaxed text-sm sm:text-base">{achievement}</span>
                       </motion.li>
                     ))}

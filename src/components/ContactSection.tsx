@@ -8,20 +8,19 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.15,
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, x: -20, scale: 0.97 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
-    x: 0,
-    scale: 1,
+    y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.4,
       ease: smooth,
     },
   },
@@ -78,37 +77,31 @@ const ContactSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, ease: smooth }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: smooth }}
           className="text-center mb-16"
         >
           <h2 className="section-label mb-4">Contact</h2>
           <h3 className="section-title mb-6">Let's Connect</h3>
-          <motion.p
-            className="text-muted-foreground max-w-xl mx-auto text-base sm:text-lg"
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.5, ease: smooth }}
-          >
+          <p className="text-muted-foreground max-w-xl mx-auto text-base sm:text-lg">
             I'm currently seeking full-time roles in analytics or consulting.
             Feel free to reach out for opportunities or collaborations.
-          </motion.p>
+          </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.15, ease: smooth }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5, ease: smooth }}
           className="max-w-lg mx-auto"
         >
           <motion.div
             className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 space-y-3 sm:space-y-4"
-            whileHover={{ y: -3 }}
-            transition={{ type: "spring", stiffness: 250, damping: 25 }}
+            whileHover={{ y: -2 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
             <motion.div
               variants={containerVariants}
@@ -122,14 +115,14 @@ const ContactSection = () => {
                     variants={cardVariants}
                     className="contact-card group"
                     whileHover={{
-                      x: 6,
-                      transition: { type: "spring", stiffness: 300, damping: 25 }
+                      x: 4,
+                      transition: { type: "spring", stiffness: 400, damping: 28 }
                     }}
                   >
                     <motion.div
                       className="p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 text-primary group-hover:from-primary group-hover:to-primary group-hover:text-primary-foreground transition-all duration-500"
-                      whileHover={{ scale: 1.08, rotate: 3 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 25 }}
                     >
                       <item.icon className="w-5 h-5" />
                     </motion.div>
@@ -138,13 +131,7 @@ const ContactSection = () => {
                       <p className="font-semibold text-sm sm:text-base break-all sm:break-normal">{item.value}</p>
                     </div>
                     {item.isLink && (
-                      <motion.div
-                        initial={{ x: 0 }}
-                        whileHover={{ x: 3 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                      >
-                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
-                      </motion.div>
+                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
                     )}
                   </motion.div>
                 );

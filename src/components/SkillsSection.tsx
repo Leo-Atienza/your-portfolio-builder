@@ -41,36 +41,33 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
+      staggerChildren: 0.07,
+      delayChildren: 0.05,
     },
   },
 };
 
 const cardVariants = {
-  hidden: { opacity: 0, y: 24, scale: 0.97 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.45,
       ease: smooth,
+      staggerChildren: 0.025,
+      delayChildren: 0.06,
     },
   },
 };
 
-const skillBadgeVariants = {
-  hidden: { opacity: 0, scale: 0.85 },
-  visible: (i: number) => ({
+const childFade = {
+  hidden: { opacity: 0, scale: 0.92 },
+  visible: {
     opacity: 1,
     scale: 1,
-    transition: {
-      delay: i * 0.03,
-      duration: 0.3,
-      ease: smooth,
-    },
-  }),
+    transition: { duration: 0.3, ease: smooth },
+  },
 };
 
 const SkillsSection = () => {
@@ -86,10 +83,10 @@ const SkillsSection = () => {
 
       <div className="section-container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5, ease: smooth }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.45, ease: smooth }}
           className="text-center mb-16"
         >
           <h2 className="section-label mb-4">Skills</h2>
@@ -101,7 +98,7 @@ const SkillsSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
+          viewport={{ once: true, margin: "-60px" }}
         >
           {skillCategories.map((category) => (
             <motion.div
@@ -109,37 +106,32 @@ const SkillsSection = () => {
               variants={cardVariants}
               className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 group"
               whileHover={{
-                y: -6,
-                transition: { type: "spring", stiffness: 250, damping: 25 }
+                y: -4,
+                transition: { type: "spring", stiffness: 300, damping: 30 }
               }}
             >
               <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <motion.div
                   className={`p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-gradient-to-br ${category.gradient} text-white shadow-lg`}
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 >
                   <category.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </motion.div>
                 <h4 className="text-lg sm:text-xl font-bold">{category.title}</h4>
               </div>
 
-              <motion.div
-                className="flex flex-wrap gap-2"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {category.skills.map((skill, index) => (
+              {/* Badges inherit from parent cardVariants */}
+              <motion.div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
                   <motion.span
                     key={skill}
-                    custom={index}
-                    variants={skillBadgeVariants}
+                    variants={childFade}
                     className="skill-badge text-sm"
                     whileHover={{
-                      scale: 1.08,
-                      y: -2,
-                      transition: { type: "spring", stiffness: 300, damping: 22 }
+                      scale: 1.06,
+                      y: -1,
+                      transition: { type: "spring", stiffness: 400, damping: 25 }
                     }}
                   >
                     {skill}

@@ -76,7 +76,7 @@ const Navigation = () => {
                     <motion.span
                       layoutId="activeNav"
                       className="absolute inset-0 bg-primary/10 rounded-full -z-10"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      transition={{ type: "spring", stiffness: 350, damping: 35 }}
                     />
                   )}
                 </a>
